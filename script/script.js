@@ -12,14 +12,19 @@ websocket.onclose = () => {console.log("DISCONNECTED")}
 
 btnSend.addEventListener('click', () => {
 let message = document.querySelector('.input1').value;
-let card = `<div class="message">Сообщение отправителя: ${message}</div>`;
-divIn.innerHTML = card;
+
+let textMessage = document.createElement('div');
+textMessage.className = "message";
+textMessage.innerHTML = `Сообщение отправителя: ${message}`;
+divIn.insertAdjacentElement('beforeEnd', textMessage);
 websocket.send(message);
 
 websocket.onmessage = function(evt) {
-  divOut.innerHTML ='<div class="message-response">Сообщение сервера: ' + evt.data+'</div>';
+  let responseMessage = document.createElement('div');
+  responseMessage.className = "message-response";
+  responseMessage.innerHTML = `Сообщение от  сервера: ${evt.data}`;
+  divOut.insertAdjacentElement('beforeEnd', responseMessage);
 };
-
 }
 )
 
@@ -28,9 +33,15 @@ btnGeo.addEventListener('click', () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { coords } = position;
       console.log(`https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}`);
-      divGeo.innerHTML = `<div class="message">
-      <a href="https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}" target="_blanc">Гео-локация</a>
-      </div>`
+      let textMessage = document.createElement('div');
+      textMessage.className = "message";
+      textMessage.innerHTML = `<a href="https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}" target="_blanc">Гео-локация</a>`;
+      divIn.insertAdjacentElement('beforeEnd', textMessage);
+
+      let noneMessage = document.createElement('div');
+      noneMessage.className = "none-message";
+      noneMessage.innerHTML = ``;
+      divOut.insertAdjacentElement('beforeEnd', noneMessage);
     });
    
   }

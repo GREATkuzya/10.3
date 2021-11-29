@@ -11,6 +11,10 @@
     border: 5px solid lightblue;
     border-radius: 5px;
     margin-top: 10px;
+    margin-left: 0px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
   }
 
   .button {
@@ -33,25 +37,42 @@
     border: 5px solid lightblue;
     border-radius: 10px;
     padding: 10px;
-    margin: 10px;
+    margin: 25px 10px;
+    width: 255px;
+    text-align: center;
       }
+
+  .none-message {
+    border: 5px solid white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 25px 10px;
+    width: 255px;
+    height: 18px;
+    text-align: center;
+  }
 
   .message-response {
     border: 5px solid lightblue;
     border-radius: 10px;
     padding: 10px;
-    margin: 10px;
+    margin: 25px 10px;
+    width: 255px;
+    text-align: center;
         
   }
 
   .div-in {
     width: auto;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
       }
 
   .div-out {
-     width: auto;
-     display: flex;
-     justify-content: flex-start;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 49px;
   }
