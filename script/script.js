@@ -9,30 +9,29 @@ const websocket = new WebSocket(url);
 websocket.onopen = () => {console.log("CONNECTED")};
 websocket.onclose = () => {console.log("DISCONNECTED")}
 
-
-btnSend.addEventListener('click', () => {
-let message = document.querySelector('.input1').value;
-
-let textMessage = document.createElement('div');
+function sentMessage(message) {
+  let textMessage = document.createElement('div');
 textMessage.className = "message";
 textMessage.innerHTML = `Сообщение отправителя: ${message}`;
 divIn.insertAdjacentElement('beforeEnd', textMessage);
 websocket.send(message);
-
-websocket.onmessage = function(evt) {
-  let responseMessage = document.createElement('div');
-  responseMessage.className = "message-response";
-  responseMessage.innerHTML = `Сообщение от  сервера: ${evt.data}`;
-  divOut.insertAdjacentElement('beforeEnd', responseMessage);
-};
 }
-)
 
-btnGeo.addEventListener('click', () => {
+function webSentMessage() {
+  websocket.onmessage = function(evt) {
+    let responseMessage = document.createElement('div');
+    responseMessage.className = "message-response";
+    responseMessage.innerHTML = `Сообщение от  сервера: ${evt.data}`;
+    divOut.insertAdjacentElement('beforeEnd', responseMessage);
+  };
+}
+
+function geoLocation() {
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
       const { coords } = position;
       console.log(`https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}`);
+
       let textMessage = document.createElement('div');
       textMessage.className = "message";
       textMessage.innerHTML = `<a href="https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}" target="_blanc">Гео-локация</a>`;
@@ -48,6 +47,18 @@ btnGeo.addEventListener('click', () => {
   else {
     console.log('Geolocation не поддерживается вашим браузером');
   }
+}
+
+btnSend.addEventListener('click', () => {
+let message = document.querySelector('.input1').value;
+sentMessage(message);
+webSentMessage();
+
+}
+)
+
+btnGeo.addEventListener('click', () => {
+  geoLocation();
 }
 )
 
