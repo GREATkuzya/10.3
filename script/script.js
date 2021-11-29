@@ -34,7 +34,7 @@ function geoLocation() {
 
       let textMessage = document.createElement('div');
       textMessage.className = "message";
-      textMessage.innerHTML = `<a href="https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}" target="_blanc">Гео-локация</a>`;
+      textMessage.innerHTML = `<a href="https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}" target="_blank">Гео-локация</a>`;
       divIn.insertAdjacentElement('beforeEnd', textMessage);
 
       let noneMessage = document.createElement('div');
